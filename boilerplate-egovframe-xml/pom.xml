@@ -104,7 +104,7 @@
 			<version>2.5.0</version>
 		</dependency>
         
-        <!-- mysql이나 oracle DB 사용시 아래 설정 추가  
+        <!-- mysql이나 oracle DB 사용시 아래 설정 추가-->
         <dependency>
             <groupId>com.googlecode.log4jdbc</groupId>
             <artifactId>log4jdbc</artifactId>
@@ -122,21 +122,42 @@
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-        
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.31</version>
         </dependency>
-
+<!--
         <dependency>
             <groupId>ojdbc</groupId>
             <artifactId>ojdbc</artifactId>
+            <version>10.2.0.3.0</version>
             <version>14</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc-14.jar</systemPath>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc-14.jar</systemPath>
         </dependency>
-        -->
+-->
+        <!-- mysql이나 oracle DB 사용시 아래 설정 추가-->
+
+<!--Spring LDCD setting-->
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+<!--Spring LDCD setting-->
+
 	</dependencies>
 
 	<build>
