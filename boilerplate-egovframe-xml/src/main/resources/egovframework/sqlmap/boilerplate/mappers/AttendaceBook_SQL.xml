@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.leedokchidok.boilerplate.attendacebook.service.impl.SampleMapper">
+
+	<resultMap id="attendaceBook"	type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO">
+		<result property="abIdx"	column="AB_IDX"/>
+		<result property="abName"	column="AB_NAME"/>
+		<result property="regDate"	column="REG_DATE"/>
+		<result property="authId"	column="AUTH_ID"/>
+		<result property="abTotCnt"	column="AB_TOT_CNT"/>
+		<result property="abDate"	column="AB_DATE"/>
+	</resultMap>
+
+<!--
+	<insert id="insertSample" parameterType="SampleVO">
+
+			INSERT INTO SAMPLE
+				( ID
+				  , NAME
+				  , DESCRIPTION
+				  , USE_YN
+				  , REG_USER )
+			VALUES ( #{id}
+				  , #{name}
+				  , #{description}
+				  , #{useYn}
+				  , #{regUser} )
+
+	</insert>
+
+	<update id="updateSample">
+
+			UPDATE SAMPLE
+			SET ID=#{id}
+				, NAME=#{name}
+				, DESCRIPTION=#{description}
+				, USE_YN=#{useYn}
+				  WHERE ID=#{id}
+
+	</update>
+
+	<delete id="deleteSample">
+
+			DELETE FROM SAMPLE
+			WHERE ID=#{id}
+
+	</delete>
+
+	<select id="selectSample" resultMap="sample">
+
+			SELECT
+				ID, NAME, DESCRIPTION, USE_YN, REG_USER
+			FROM SAMPLE
+			WHERE ID=#{id}
+
+	</select>
+-->
+	<select id="attendaceBookList" parameterType="searchVO" resultType="egovMap">
+
+			SELECT
+				AB_IDX,
+				AB_NAME,
+				REG_DATE,
+				AUTH_ID,
+				AB_TOT_CNT
+			FROM AB_MEMBER
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+			ORDER BY AB_IDX DESC
+			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+<!--
+	<select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM SAMPLE
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND ID LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+			</if>
+	</select>
+-->
+</mapper>
