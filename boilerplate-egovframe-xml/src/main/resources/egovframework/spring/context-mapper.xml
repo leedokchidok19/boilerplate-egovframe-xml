@@ -5,16 +5,24 @@
 							http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
 >
 
-	<!-- SqlSession setup for MyBatis Database Layer -->
+<!--	SqlSession setup for MyBatis Database Layer
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property	name="dataSource"			ref="dataSource" />
 		<property	name="configLocation"		value="classpath:/egovframework/sqlmap/example/sql-mapper-config.xml" />
 		<property	name="mapperLocations"		value="classpath:/egovframework/sqlmap/example/mappers/*.xml" />
 	</bean>
+-->
 
-	<!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
+<!--	MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface
  	<bean class="org.egovframe.rte.psl.dataaccess.mapper.MapperConfigurer">
 		<property	name="basePackage"		value="egovframework.example.sample.service.impl" />
 	</bean>
-    
+-->
+
+<!--	SqlSession setup for MyBatis Database Layer	-->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property	name="dataSource"			ref="dataSource" />
+		<property	name="configLocation"		value="classpath:/egovframework/sqlmap/boilerplate/sql-mapper-config.xml" />
+		<property	name="mapperLocations"		value="classpath:/egovframework/sqlmap/boilerplate/mappers/*.xml" />
+	</bean>
 </beans>
