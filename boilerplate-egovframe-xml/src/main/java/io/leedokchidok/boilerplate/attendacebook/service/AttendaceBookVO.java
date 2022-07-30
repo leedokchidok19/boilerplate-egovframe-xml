@@ -1,8 +1,10 @@
 package io.leedokchidok.boilerplate.attendacebook.service;
 
+import io.leedokchidok.boilerplate.main.service.MainDefaultVO;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @Class Name	:	AttendaceBookVO.java
@@ -23,7 +25,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NonNull//파라미터 값에 NULL이 올 수 없다
-public class AttendaceBookVO {
+@ToString
+public class AttendaceBookVO extends MainDefaultVO {
 
 	
 	private String abIdx	=	null;		//인덱스
@@ -33,12 +36,5 @@ public class AttendaceBookVO {
 	private String abTotCnt	=	null;		//총 출석수
 
 	private String abDate	=	null;		//출석날짜
-	
-	private int pageIndex	=	1;			//현재페이지
-	private int pageUnit	=	10;			//페이지갯수
-	private int pageSize	=	10;			//페이지사이즈
-	private int firstIndex	=	1;			//firstIndex
-	private int lastIndex	=	1;			//lastIndex
-	private int recordCountPerPage	=	10;	//recordCountPerPage
 
 }//AttendaceBookVO

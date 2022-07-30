@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookService;
 import io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Class Name	:	AttendaceBookController.java
@@ -30,6 +31,7 @@ import io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
+@Slf4j
 @Controller
 public class AttendaceBookController {
 
@@ -58,8 +60,8 @@ public class AttendaceBookController {
 		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
 		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-//		List<?> sampleList = attendaceBookService.selectAttendaceBook(searchVO);
-//		model.addAttribute("resultList", sampleList);
+		List<?> sampleList = attendaceBookService.selectAttendaceBook(searchVO);
+		model.addAttribute("resultList", sampleList);
 
 		//int totCnt = attendaceBookService.selectSampleListTotCnt(searchVO);
 		//paginationInfo.setTotalRecordCount(totCnt);

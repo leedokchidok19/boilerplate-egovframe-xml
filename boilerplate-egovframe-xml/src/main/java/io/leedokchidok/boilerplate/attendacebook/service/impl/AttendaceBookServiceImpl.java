@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
+@Slf4j
 @Service("attendaceBookService")
 public class AttendaceBookServiceImpl extends EgovAbstractServiceImpl implements AttendaceBookService {
 
@@ -46,7 +47,7 @@ public class AttendaceBookServiceImpl extends EgovAbstractServiceImpl implements
 	 */
 	@Override
 	public List<?> selectAttendaceBook(AttendaceBookVO vo) throws Exception {
-		//log.info("DAO-selectAttendaceBook\n출석부 조회");
+		log.info("DAO-selectAttendaceBook\n출석부 조회");
 		return attendaceBookDAO.attendaceBookList(vo);
 	}
 

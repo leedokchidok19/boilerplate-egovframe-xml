@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<h1> Hi</h1>
+<h1>메인 페이지</h1>
+<h3><a href="/attendaceBook.do">출석부</a></h3>
 
 </body>
 </html>
