@@ -60,8 +60,10 @@ public class AttendaceBookController {
 		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
 		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-		List<?> sampleList = attendaceBookService.selectAttendaceBook(searchVO);
-		model.addAttribute("resultList", sampleList);
+		List<?> attendaceBookList = attendaceBookService.attendaceBookList(searchVO);
+		model.addAttribute("attendaceBookList", attendaceBookList);
+
+		log.info("attendaceBookList: "+attendaceBookList);
 
 		//int totCnt = attendaceBookService.selectSampleListTotCnt(searchVO);
 		//paginationInfo.setTotalRecordCount(totCnt);

@@ -12,49 +12,69 @@
 	</resultMap>
 
 <!--
-	<insert id="insertSample" parameterType="SampleVO">
+	1. order="BEFORE"는 insert 전에 조회
+	2. selectKey 구문의 위치는 INSERT 쿼리 위, 아래 상관 없이 위치
+-->
+	<!--	출석부 인원 입력	-->
+	<insert id="insertAttendaceBook" parameterType="AttendaceBookVO">
 
-			INSERT INTO SAMPLE
-				( ID
-				  , NAME
-				  , DESCRIPTION
-				  , USE_YN
-				  , REG_USER )
-			VALUES ( #{id}
-				  , #{name}
-				  , #{description}
-				  , #{useYn}
-				  , #{regUser} )
+		<selectKey keyProperty="abIdx" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(AB_IDX), 0) + 1 FROM AB_MEMBER
+		</selectKey>
+
+		INSERT INTO AB_MEMBER
+					(
+						AB_IDX,
+						AB_NAME,
+						REG_DATE,
+						AUTH_ID
+					)
+		VALUES
+					(
+						#{abIdx},
+						#{abName},
+						DATE_FORMAT(NOW(), '%Y-%M-%D'),
+						'A03'
+					)
 
 	</insert>
 
-	<update id="updateSample">
+	<!--	출석부 인원 이름, 권한 수정	-->
+	<update id="updateAttendaceBook">
 
-			UPDATE SAMPLE
-			SET ID=#{id}
-				, NAME=#{name}
-				, DESCRIPTION=#{description}
-				, USE_YN=#{useYn}
-				  WHERE ID=#{id}
+			UPDATE AB_MEMBER
+			SET
+				AB_NAME	=	#{abName}
+				<if test="authId != null and authId != ''">
+				, AUTH_ID	=	#{authId}
+				</if>
+			WHERE AB_IDX=#{abIdx}
 
 	</update>
 
-	<delete id="deleteSample">
+		<!--	출석부 인원 삭제	-->
+	<delete id="deleteAttendaceBook">
 
-			DELETE FROM SAMPLE
-			WHERE ID=#{id}
+			DELETE FROM AB_MEMBER
+			WHERE AB_IDX	=	#{abIdx}
 
 	</delete>
 
-	<select id="selectSample" resultMap="sample">
+	<!--	출석부 인원 상세정보	-->
+	<select id="selectAttendaceBook" resultMap="attendaceBook">
 
 			SELECT
-				ID, NAME, DESCRIPTION, USE_YN, REG_USER
-			FROM SAMPLE
-			WHERE ID=#{id}
+				AB_IDX,
+				AB_NAME,
+				REG_DATE,
+				AUTH_ID,
+				AB_TOT_CNT
+			FROM AB_MEMBER
+			WHERE AB_IDX	=	#{abIdx}
 
 	</select>
--->
+
+		<!--	출석부 인원 목록	-->
 	<select id="attendaceBookList" parameterType="searchVO" resultType="egovMap">
 
 			SELECT
@@ -66,34 +86,36 @@
 			FROM AB_MEMBER
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
-		        <choose>
-		            <when test="searchCondition == 0">
+				<choose>
+					<when test="searchCondition == 0">
 						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
 					</when>
-		            <when test="searchCondition == 1">
+					<when test="searchCondition == 1">
 						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
 					</when>
 				</choose>
 			</if>
-			ORDER BY AB_IDX DESC
+			ORDER BY REG_DATE
 			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
-<!--
-	<select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
 
-			SELECT COUNT(*) totcnt
-			FROM SAMPLE
+	<!--	출석부 인원 페이징	-->
+	<select id="selectAttendaceBookListTotCnt" parameterType="searchVO" resultType="int">
+
+			SELECT
+				COUNT(*) TOTCNT
+			FROM AB_MEMBER
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
-		        <choose>
-		            <when test="searchCondition == 0">
-						AND ID LIKE '%' || #{searchKeyword} || '%'
+				<choose>
+					<when test="searchCondition == 0">
+						AND AB_NAME LIKE '%' || #{searchKeyword} || '%'
 					</when>
-		            <when test="searchCondition == 1">
-						AND	NAME LIKE '%' || #{searchKeyword} || '%'
+					<when test="searchCondition == 1">
+						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
 					</when>
 				</choose>
 			</if>
 	</select>
--->
+
 </mapper>

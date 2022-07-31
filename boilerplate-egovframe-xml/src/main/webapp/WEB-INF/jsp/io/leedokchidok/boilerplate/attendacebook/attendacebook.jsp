@@ -10,5 +10,18 @@
 
 <h1>Hi</h1>
 
+<section>
+
+	<div class="user">
+		<h3>인원 추가</h3>
+		<form action="#">
+			<input type="text" id="insertUser" name="abName" placeholder="이름을 입력 해주세요."/>
+		</form>
+	</div>
+
+</section>
+
+<div>${attendaceBookList}</div>
+
 </body>
 </html>

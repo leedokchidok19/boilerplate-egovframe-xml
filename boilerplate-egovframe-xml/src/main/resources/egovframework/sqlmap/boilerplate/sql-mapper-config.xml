@@ -3,7 +3,8 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias	alias="egovMap"		type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
-		<typeAlias	alias="searchVO"	type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO"/>
+		<typeAlias	alias="egovMap"			type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
+		<typeAlias	alias="AttendaceBookVO"	type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO"/>
+		<typeAlias	alias="searchVO"		type="io.leedokchidok.boilerplate.main.service.MainDefaultVO"/>
 	</typeAliases>
 </configuration>

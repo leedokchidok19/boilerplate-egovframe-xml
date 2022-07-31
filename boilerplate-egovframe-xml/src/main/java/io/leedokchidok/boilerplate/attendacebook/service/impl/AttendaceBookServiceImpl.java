@@ -39,16 +39,42 @@ public class AttendaceBookServiceImpl extends EgovAbstractServiceImpl implements
 	@Resource(name="attendaceBookMapper")
 	private AttendaceBookMapper attendaceBookDAO;
 
-	/**
-	 * 출석부를 조회한다.
-	 * @param vo - 조회할 정보가 담긴 AttendaceBookVO
-	 * @return 조회한 출석부
-	 * @exception Exception
-	 */
 	@Override
-	public List<?> selectAttendaceBook(AttendaceBookVO vo) throws Exception {
-		log.info("DAO-selectAttendaceBook\n출석부 조회");
-		return attendaceBookDAO.attendaceBookList(vo);
+	public String insertAttendaceBook(AttendaceBookVO vo) throws Exception {
+		log.info("impl-insertAttendaceBook\n출석부 인원 등록");
+		attendaceBookDAO.insertAttendaceBook(vo);
+		return "success";
 	}
+
+	@Override
+	public void updateAttendaceBook(AttendaceBookVO vo) throws Exception {
+		log.info("impl-updateAttendaceBook\n출석부 인원 수정");
+		attendaceBookDAO.updateAttendaceBook(vo);
+	}
+
+	@Override
+	public void deleteAttendaceBook(AttendaceBookVO vo) throws Exception {
+		log.info("impl-deleteAttendaceBook\n출석부 인원 삭제");
+		attendaceBookDAO.deleteAttendaceBook(vo);
+	}
+
+	@Override
+	public AttendaceBookVO selectAttendaceBook(AttendaceBookVO vo) throws Exception {
+		log.info("impl-selectAttendaceBook\n출석부 인원 상세 조회");
+		return attendaceBookDAO.selectAttendaceBook(vo);
+	}
+
+	@Override
+	public List<?> attendaceBookList(AttendaceBookVO searchVO) throws Exception {
+		log.info("impl-attendaceBookList\n출석부 목록 조회");
+		return attendaceBookDAO.attendaceBookList(searchVO);
+	}
+
+	@Override
+	public int selectAttendaceBookListTotCnt(AttendaceBookVO searchVO) throws Exception {
+		log.info("impl-selectAttendaceBookListTotCnt\n출석부 총 인원");
+		return attendaceBookDAO.selectAttendaceBookListTotCnt(searchVO);
+	}
+
 
 }//AttendaceBookServiceImpl
