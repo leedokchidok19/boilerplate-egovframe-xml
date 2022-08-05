@@ -76,5 +76,4 @@ public class AttendaceBookServiceImpl extends EgovAbstractServiceImpl implements
 		return attendaceBookDAO.selectAttendaceBookListTotCnt(searchVO);
 	}
 
-
 }//AttendaceBookServiceImpl

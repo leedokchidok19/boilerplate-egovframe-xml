@@ -1,11 +1,15 @@
 package io.leedokchidok.boilerplate.attendacebook.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookService;
 import io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO;
+import io.leedokchidok.boilerplate.util.Converter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -61,13 +66,37 @@ public class AttendaceBookController {
 		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
 		List<?> attendaceBookList = attendaceBookService.attendaceBookList(searchVO);
-		model.addAttribute("attendaceBookList", attendaceBookList);
-
+		JSONArray attendBookJsonArry = Converter.listToJson(attendaceBookList);
+		model.addAttribute("attendaceBookList", attendBookJsonArry);
 		log.info("attendaceBookList: "+attendaceBookList);
+
+		List<String> nameList			=	new ArrayList<>();	//이름
+		List<String> subMonthOneList	=	new ArrayList<>();	//이번 달 출석수
+		List<String> subMonthTwoList	=	new ArrayList<>();	//1개월 출석 횟수
+		List<String> totCntList			=	new ArrayList<>();	//총 출석수
+
+		int testi = attendBookJsonArry.length();
+		log.info("testi: "+testi);
+		
+		//조회 정렬과 입력 후 정렬 순서가 맞지 않기 때문에 역순으로 입력
+		for(int i = attendBookJsonArry.length(); i > 0; --i) {
+			log.info("i: "+i);
+			JSONObject abList = attendBookJsonArry.getJSONObject(i-1);
+			nameList.add(abList.get("abName").toString());
+			subMonthOneList.add(abList.get("abCntMonthOne").toString());
+			subMonthTwoList.add(abList.get("abCntMonthTwo").toString());
+			totCntList.add(abList.get("abTotCnt").toString());
+
+		}//for
+
+		model.addAttribute("nameList", nameList);
+		model.addAttribute("subMonthOne", subMonthOneList);
+		model.addAttribute("subMonthTwo", subMonthTwoList);
+		model.addAttribute("totCnt", totCntList);
 
 		//int totCnt = attendaceBookService.selectSampleListTotCnt(searchVO);
 		//paginationInfo.setTotalRecordCount(totCnt);
-		model.addAttribute("paginationInfo", paginationInfo);
+		//model.addAttribute("paginationInfo", paginationInfo);
 
 		return "attendacebook/attendacebook";
 	}//moveAttendaceBook

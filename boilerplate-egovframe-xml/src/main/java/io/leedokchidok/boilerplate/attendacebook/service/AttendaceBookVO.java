@@ -37,4 +37,8 @@ public class AttendaceBookVO extends MainDefaultVO {
 
 	private String abDate	=	null;		//출석날짜
 
+	//table 없는 컬럼
+	private String abCntMonthOne	=	null;	//이번 달 출석 수
+	private String abCntMonthTwo	=	null;	//1개월 전 출석 수
+
 }//AttendaceBookVO

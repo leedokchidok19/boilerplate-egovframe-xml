@@ -14,7 +14,7 @@
 		<result property="abTotCnt"	column="AB_TOT_CNT"/>
 		<result property="abDate"	column="AB_DATE"/>
 	</resultMap>
-<!-- 
+<!--
 	<insert id="attendaceBookDAO.insertSample">
 		<![CDATA[
 			INSERT INTO SAMPLE 
@@ -48,16 +48,17 @@
 			WHERE ID=#id#
 		]]>
 	</delete>
-    
-    <select id="attendaceBookDAO.selectSample" resultMap="attendaceBook">
-        <![CDATA[
-            SELECT
-                ID, NAME, DESCRIPTION, USE_YN, REG_USER
-            FROM SAMPLE 
-            WHERE ID=#id#
-        ]]>
-    </select>
+
+	<select id="attendaceBookDAO.selectSample" resultMap="attendaceBook">
+		<![CDATA[
+			SELECT
+				ID, NAME, DESCRIPTION, USE_YN, REG_USER
+			FROM SAMPLE 
+			WHERE ID=#id#
+		]]>
+	</select>
  -->
+
 	<select id="attendaceBookDAO.attendaceBookList" parameterClass="searchVO" resultClass="egovMap">
 
 			SELECT
@@ -75,9 +76,10 @@
 				AB_NAME LIKE '%' || #searchKeyword# || '%'
 			</isEqual>
 			ORDER BY AB_IDX DESC
-			LIMIT #recordCountPerPage# OFFSET #firstIndex#		
+			LIMIT #recordCountPerPage# OFFSET #firstIndex#
 	</select>
-<!-- 	
+
+<!--
 	<select id="attendaceBookDAO.selectSampleListTotCnt" parameterClass="searchVO" resultClass="int">
 
 			SELECT COUNT(*) totcnt

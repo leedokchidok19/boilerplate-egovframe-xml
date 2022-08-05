@@ -2,13 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.leedokchidok.boilerplate.attendacebook.service.impl.AttendaceBookMapper">
 
-	<resultMap id="attendaceBook"	type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO">
-		<result property="abIdx"	column="AB_IDX"/>
-		<result property="abName"	column="AB_NAME"/>
-		<result property="regDate"	column="REG_DATE"/>
-		<result property="authId"	column="AUTH_ID"/>
-		<result property="abTotCnt"	column="AB_TOT_CNT"/>
-		<result property="abDate"	column="AB_DATE"/>
+	<resultMap id="attendaceBook"			type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO">
+		<result property="abIdx"			column="AB_IDX"/>
+		<result property="abName"			column="AB_NAME"/>
+		<result property="regDate"			column="REG_DATE"/>
+		<result property="authId"			column="AUTH_ID"/>
+		<result property="abTotCnt"			column="AB_TOT_CNT"/>
+		<result property="abDate"			column="AB_DATE"/>
+		<!--table 없는 컬럼-->
+		<result property="abCntMonthOne"	column="AB_CNT_MONTH_ONE"/>
+		<result property="abCntMonthTwo"	column="AB_CNT_MONTH_TWO"/>
+
 	</resultMap>
 
 <!--
@@ -74,29 +78,49 @@
 
 	</select>
 
-		<!--	출석부 인원 목록	-->
+	<!--	출석부 인원 목록
+		설명 : 최근 1, 2개월과 총 출석일 조회
+		정렬 조건 :	1) 모임장 > 운영자 > 일반 순서
+					2) 총 1개월 출석일 가장 높은 순서
+					3) 가장 최근에 출석한 사람 순서
+					4) 그 이외의 조건은 가입 날짜가 빠른 사람 순서
+		컬럼 :	1) AB_CNT_MONTH_ONE : 이번 달 출석 수
+				2) AB_CNT_MONTH_TWO : 1개월 전 출석 수
+				3) AB_DATE : 최근 출석일
+	-->
 	<select id="attendaceBookList" parameterType="searchVO" resultType="egovMap">
 
-			SELECT
-				AB_IDX,
-				AB_NAME,
-				REG_DATE,
-				AUTH_ID,
-				AB_TOT_CNT
-			FROM AB_MEMBER
-			WHERE 1=1
-			<if test="searchKeyword != null and searchKeyword != ''">
-				<choose>
-					<when test="searchCondition == 0">
-						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
-					</when>
-					<when test="searchCondition == 1">
-						AND	AB_NAME LIKE '%' || #{searchKeyword} || '%'
-					</when>
-				</choose>
-			</if>
-			ORDER BY REG_DATE
-			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+		SELECT
+			ABM.AB_IDX,
+			ABM.AB_NAME,
+			ABM.REG_DATE,
+			ABM.AUTH_ID,
+			ABM.AB_TOT_CNT,
+			(
+				SELECT
+					COUNT(*)
+				FROM ATTENDACE
+				WHERE ABM.AB_IDX = AB_IDX
+				AND DATE_FORMAT(AB_DATE, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
+			) AS AB_CNT_MONTH_ONE,
+			(
+				SELECT
+					COUNT(*)
+				FROM ATTENDACE
+				WHERE ABM.AB_IDX = AB_IDX
+				AND DATE_FORMAT(AB_DATE, '%Y-%m') = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH ), '%Y-%m')
+			) AS AB_CNT_MONTH_TWO,
+			IFNULL( (
+				SELECT
+					AB_DATE
+				FROM ATTENDACE
+				WHERE ABM.AB_IDX = AB_IDX
+				ORDER BY AB_DATE DESC
+				LIMIT 1
+			), '2022-01-01') AS AB_DATE
+		FROM AB_MEMBER AS ABM
+		ORDER BY AUTH_ID, AB_CNT_MONTH_ONE DESC, AB_DATE DESC, REG_DATE
+
 	</select>
 
 	<!--	출석부 인원 페이징	-->
