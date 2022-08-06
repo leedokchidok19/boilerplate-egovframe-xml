@@ -1,7 +1,6 @@
 package io.leedokchidok.boilerplate.attendacebook.web;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -48,6 +47,20 @@ public class AttendaceBookController {
 	@Resource(name = "propertiesService")
 	protected EgovPropertyService propertiesService;
 
+	@GetMapping("/insertAttendaceBookMember.do")
+	public String insertAttendaceBookMember(@ModelAttribute("attendaceBookVO") AttendaceBookVO attendaceBookVO, ModelMap model) throws Exception {
+
+		String msg = "Failed";
+		log.info("attendaceBookVO: "+attendaceBookVO);
+		int result = attendaceBookService.insertAttendaceBook(attendaceBookVO);
+
+		if(result > 0 ) msg = "Success";
+
+		model.addAttribute("msg", msg);
+
+		return "redirect:/attendaceBook.do";
+	}//insertAttendaceBookMember
+
 	@GetMapping("/attendaceBook.do")
 	public String moveAttendaceBook(@ModelAttribute("searchVO") AttendaceBookVO searchVO, ModelMap model) throws Exception {
 
@@ -67,7 +80,6 @@ public class AttendaceBookController {
 
 		List<?> attendaceBookList = attendaceBookService.attendaceBookList(searchVO);
 		JSONArray attendBookJsonArry = Converter.listToJson(attendaceBookList);
-		model.addAttribute("attendaceBookList", attendBookJsonArry);
 		log.info("attendaceBookList: "+attendaceBookList);
 
 		List<String> nameList			=	new ArrayList<>();	//이름
@@ -76,11 +88,9 @@ public class AttendaceBookController {
 		List<String> totCntList			=	new ArrayList<>();	//총 출석수
 
 		int testi = attendBookJsonArry.length();
-		log.info("testi: "+testi);
 		
 		//조회 정렬과 입력 후 정렬 순서가 맞지 않기 때문에 역순으로 입력
 		for(int i = attendBookJsonArry.length(); i > 0; --i) {
-			log.info("i: "+i);
 			JSONObject abList = attendBookJsonArry.getJSONObject(i-1);
 			nameList.add(abList.get("abName").toString());
 			subMonthOneList.add(abList.get("abCntMonthOne").toString());

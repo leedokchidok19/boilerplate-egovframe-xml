@@ -37,7 +37,7 @@
 					(
 						#{abIdx},
 						#{abName},
-						DATE_FORMAT(NOW(), '%Y-%M-%D'),
+						DATE_FORMAT(NOW(), '%Y-%m-%d'),
 						'A03'
 					)
 

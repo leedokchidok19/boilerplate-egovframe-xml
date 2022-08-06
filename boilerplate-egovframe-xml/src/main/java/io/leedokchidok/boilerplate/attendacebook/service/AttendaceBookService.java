@@ -27,7 +27,7 @@ public interface AttendaceBookService {
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
-	String insertAttendaceBook(AttendaceBookVO vo) throws Exception;
+	int insertAttendaceBook(AttendaceBookVO vo) throws Exception;
 
 	/**
 	 * 출석부 인원을 수정한다.

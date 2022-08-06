@@ -40,10 +40,10 @@ public class AttendaceBookServiceImpl extends EgovAbstractServiceImpl implements
 	private AttendaceBookMapper attendaceBookDAO;
 
 	@Override
-	public String insertAttendaceBook(AttendaceBookVO vo) throws Exception {
+	public int insertAttendaceBook(AttendaceBookVO vo) throws Exception {
 		log.info("impl-insertAttendaceBook\n출석부 인원 등록");
-		attendaceBookDAO.insertAttendaceBook(vo);
-		return "success";
+		int result = attendaceBookDAO.insertAttendaceBook(vo);
+		return result;
 	}
 
 	@Override

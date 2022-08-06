@@ -24,13 +24,17 @@
 
 <h1>Hi</h1>
 
-<section>
+<section class="attendacebook">
 
-	<div class="user">
+	<div class="attendacebook__user">
 		<h3>인원 추가</h3>
-		<form action="#">
+		<form class="attendacebook__form" action="#" onsubmit="return false">
 			<input type="text" id="insertUser" name="abName" placeholder="이름을 입력 해주세요."/>
 		</form>
+	</div>
+
+	<div class="attendacebook__list">
+		<!--출석인원 목록-->
 	</div>
 
 </section>
@@ -41,25 +45,47 @@
 
 </section>
 
+	<script type="text/javascript">
+
+		const form = document.querySelector('.attendacebook__form');
+		form.action = '/insertAttendaceBookMember.do';
+		form.method = 'GET';
+		
+		const userName = document.querySelector('#insertUser');
+		userName.addEventListener('keypress', e  => {
+			e.preventDefault();
+			console.log(e.charCode);
+			const keyCode = e.charCode;
+			if(keyCode == 13) form.submit();
+		});
+
+	</script>
 	<script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
 	<script type="text/javascript">
 
-			const nameList = `${nameList}`;
+		const nameList	=	`${nameList}`;
+		const totCnt	=	`${totCnt}`;
+	
+		let nmList	=	nameList.replace(/[\[\]]/gi, '').split(',');
+		let tCnt	=	totCnt.replace(/[\[\]]/gi, '').split(',');
+
+		function initChart(nmList, tCnt) {
+
+			const nameList		=	nmList
 			console.log('nameList: '+nameList);
 			console.log(typeof nameList);
 
-			const subMonthOne	= `${subMonthOne}`;
-			const subMonthTwo	= `${subMonthTwo}`;
-			const totCnt		= `${totCnt}`;
+			const subMonthOne	=	`${subMonthOne}`;
+			const subMonthTwo	=	`${subMonthTwo}`;
+			const totCnt		=	tCnt;
 
-			//const abkList = '${attendaceBookList}';
 			//let jsonList = abkList.replace(/[\[\]]/gi, '');
 			//console.log(jsonList);
 			//const attendaceBookList = JSON.stringify(jsonList);
-			let yAxisData	=	nameList.replace(/[\[\]]/gi, '').split(',');
+			let yAxisData	=	nmList;
 			let seriessOne	=	subMonthOne.replace(/[\[\]]/gi, '').split(',');
 			let seriessTwo	=	subMonthTwo.replace(/[\[\]]/gi, '').split(',');
-			let seriessThr	=	totCnt.replace(/[\[\]]/gi, '').split(',');
+			let seriessThr	=	totCnt;
 		/*
 			attendaceBookList.forEach( element => {
 				yAxisData.push(element.abName);
@@ -74,8 +100,9 @@
 				renderer: 'canvas',
 				useDirtyRect: false
 			});
+
 			let app = {};
-			
+
 			let option;
 	
 			option = {
@@ -145,6 +172,16 @@
 			}
 	
 			window.addEventListener('resize', myChart.resize);
+
+		}//initChart
+
+
+		function init() {
+			initChart(nmList, tCnt);
+		}//init
+
+		init();
+
 	</script>
 
 </body>
