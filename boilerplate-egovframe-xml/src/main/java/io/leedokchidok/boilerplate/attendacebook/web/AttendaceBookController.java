@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.egovframe.rte.fdl.property.EgovPropertyService;
+import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.egovframe.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,11 +51,39 @@ public class AttendaceBookController {
 	@GetMapping("/insertAttendaceBookMember.do")
 	public String insertAttendaceBookMember(@ModelAttribute("attendaceBookVO") AttendaceBookVO attendaceBookVO, ModelMap model) throws Exception {
 
-		String msg = "Failed";
-		log.info("attendaceBookVO: "+attendaceBookVO);
-		int result = attendaceBookService.insertAttendaceBook(attendaceBookVO);
+		log.info("출석부 입력");
+		int result = 0;			//성공, 실패 결과값
+		String msg = "Failed";	//성공, 실패 메시지
 
-		if(result > 0 ) msg = "Success";
+		log.info("attendaceBookVO: "+attendaceBookVO);
+
+		attendaceBookVO.setSearchKeyword(attendaceBookVO.getAbName());
+		List<?> attendaceBookList = attendaceBookService.attendaceBookList(attendaceBookVO);
+		
+		log.info("attendaceBookList: "+attendaceBookList);
+		//출석부에 있는 인원일 경우 1 아니면 0
+		result = attendaceBookList.size();
+
+		//
+		if(result > 0 ) {
+			EgovMap egovMap = new EgovMap();
+			egovMap = (EgovMap) attendaceBookList.get(0);
+			String abIdx = egovMap.get("abIdx").toString();
+			attendaceBookVO.setAbIdx(Integer.parseInt(abIdx));
+			attendaceBookVO.setAbName(null);
+
+			attendaceBookService.updateAttendaceBook(attendaceBookVO);	//총 출석일 count+1 증가
+			attendaceBookService.insertAttendaceDate(attendaceBookVO);	//출석일 입력
+			msg = "update";
+
+		}
+
+		if(result == 0) {
+
+			result = attendaceBookService.insertAttendaceBook(attendaceBookVO);
+			msg = "insert";
+
+		}
 
 		model.addAttribute("msg", msg);
 

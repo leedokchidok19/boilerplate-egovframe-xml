@@ -175,9 +175,29 @@
 
 		}//initChart
 
+		function memberList(nmList, tCnt) {
+
+			//reverse() 배열 순서 역순
+			const nameList	=	nmList.reverse();
+			const totCnt	=	tCnt.reverse();
+
+			let tags		=	'';
+			
+			for(let i =0; i < nameList.length; i++) {
+				let name	=	nameList[i];
+				let cnt		=	totCnt[i];
+				tags	+=	'<div >'
+						+			name +' : ' + cnt
+						+	'</div>';
+			}
+
+			let attendacebookList	=	document.querySelector('.attendacebook__list');
+			attendacebookList.insertAdjacentHTML('afterend', tags);
+		}//memberList
 
 		function init() {
 			initChart(nmList, tCnt);
+			memberList(nmList, tCnt);
 		}//init
 
 		init();

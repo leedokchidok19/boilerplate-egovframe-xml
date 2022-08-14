@@ -15,11 +15,10 @@
 
 	</resultMap>
 
-<!--
-	1. order="BEFORE"는 insert 전에 조회
-	2. selectKey 구문의 위치는 INSERT 쿼리 위, 아래 상관 없이 위치
--->
-	<!--	출석부 인원 입력	-->
+	<!--	출석부 인원 신규 입력
+		1. order="BEFORE"는 insert 전에 조회
+		2. selectKey 구문의 위치는 INSERT 쿼리 위, 아래 상관 없이 위치
+	-->
 	<insert id="insertAttendaceBook" parameterType="AttendaceBookVO">
 
 		<selectKey keyProperty="abIdx" resultType="int" order="BEFORE">
@@ -36,9 +35,27 @@
 		VALUES
 					(
 						#{abIdx},
-						#{abName},
+						TRIM( #{abName} ),
 						DATE_FORMAT(NOW(), '%Y-%m-%d'),
 						'A03'
+					)
+
+	</insert>
+
+	<!--	출석부 인원 출석일 입력
+		1. 입력한 날을 기준으로 출석일 추가
+	-->
+	<insert id="insertAttendaceDate" parameterType="AttendaceBookVO">
+
+		INSERT INTO ATTENDACE
+					(
+						AB_IDX,
+						AB_DATE
+					)
+		VALUES
+					(
+						#{abIdx},
+						DATE_FORMAT(NOW(), '%Y-%m-%d')
 					)
 
 	</insert>
@@ -48,9 +65,11 @@
 
 			UPDATE AB_MEMBER
 			SET
-				AB_NAME	=	#{abName}
-				<if test="authId != null and authId != ''">
-				, AUTH_ID	=	#{authId}
+				<if test="abName != null and abName != ''">
+					AB_NAME	=	#{abName}
+				</if>
+				<if test="searchKeyword != null">
+					AB_TOT_CNT	=	AB_TOT_CNT +1
 				</if>
 			WHERE AB_IDX=#{abIdx}
 
@@ -119,6 +138,10 @@
 				LIMIT 1
 			), '2022-01-01') AS AB_DATE
 		FROM AB_MEMBER AS ABM
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			AND AB_NAME = TRIM( #{searchKeyword} )
+		</if>
 		ORDER BY AUTH_ID, AB_CNT_MONTH_ONE DESC, AB_DATE DESC, REG_DATE
 
 	</select>
@@ -140,6 +163,7 @@
 					</when>
 				</choose>
 			</if>
+
 	</select>
 
 </mapper>

@@ -29,7 +29,7 @@ import lombok.ToString;
 public class AttendaceBookVO extends MainDefaultVO {
 
 	
-	private int abIdx		=	0;		//인덱스
+	private int abIdx		=	0;			//인덱스
 	private String abName	=	null;		//이름
 	private String regDate	=	null;		//가입날짜
 	private String authId	=	null;		//권한ID

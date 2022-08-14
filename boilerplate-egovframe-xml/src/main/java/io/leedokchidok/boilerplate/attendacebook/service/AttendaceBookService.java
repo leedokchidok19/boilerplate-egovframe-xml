@@ -30,12 +30,20 @@ public interface AttendaceBookService {
 	int insertAttendaceBook(AttendaceBookVO vo) throws Exception;
 
 	/**
+	 * 출석부 인원 출석일 입력한다.
+	 * @param vo - 등록할 정보가 담긴 AttendaceBookVO
+	 * @return 등록 결과
+	 * @exception Exception
+	 */
+	int insertAttendaceDate(AttendaceBookVO vo) throws Exception;
+
+	/**
 	 * 출석부 인원을 수정한다.
 	 * @param vo - 수정할 정보가 담긴 AttendaceBookVO
 	 * @return void형
 	 * @exception Exception
 	 */
-	void updateAttendaceBook(AttendaceBookVO vo) throws Exception;
+	int updateAttendaceBook(AttendaceBookVO vo) throws Exception;
 
 	/**
 	 * 출석부 인원을 삭제한다.

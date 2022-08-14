@@ -42,14 +42,19 @@ public class AttendaceBookServiceImpl extends EgovAbstractServiceImpl implements
 	@Override
 	public int insertAttendaceBook(AttendaceBookVO vo) throws Exception {
 		log.info("impl-insertAttendaceBook\n출석부 인원 등록");
-		int result = attendaceBookDAO.insertAttendaceBook(vo);
-		return result;
+		return attendaceBookDAO.insertAttendaceBook(vo);
 	}
 
 	@Override
-	public void updateAttendaceBook(AttendaceBookVO vo) throws Exception {
+	public int insertAttendaceDate(AttendaceBookVO vo) throws Exception {
+		log.info("impl-insertAttendaceDate\n출석부 인원 출석일 등록");
+		return attendaceBookDAO.insertAttendaceDate(vo);
+	}
+
+	@Override
+	public int updateAttendaceBook(AttendaceBookVO vo) throws Exception {
 		log.info("impl-updateAttendaceBook\n출석부 인원 수정");
-		attendaceBookDAO.updateAttendaceBook(vo);
+		return attendaceBookDAO.updateAttendaceBook(vo);
 	}
 
 	@Override
