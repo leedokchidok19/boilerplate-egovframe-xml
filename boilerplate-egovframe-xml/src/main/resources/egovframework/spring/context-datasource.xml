@@ -13,7 +13,7 @@
 	<!-- 테스트 실행용 --> 
 <!--
 	<jdbc:embedded-database id="dataSource" type="HSQL">
-		<jdbc:script location= "classpath:/db/sampledb.sql"/>
+		<jdbc:script location= "classpath:/db/hsql/sampledb.sql"/>
 	</jdbc:embedded-database>
 -->
      
