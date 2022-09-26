@@ -27,7 +27,14 @@ public class MainController {
 
 	@GetMapping("/main.do")
 	public String moveMain() {
-		log.info("Controller-moveMain\n메인 도착");
+		log.info("Controller-moveMain\n메인");
 		return "main/main";
 	}
-}
+
+	@GetMapping("/login.do")
+	public String moveLogin() {
+		log.info("Controller-moveLogin\n로그인");
+		return "main/login";
+	}
+
+}//MainController
