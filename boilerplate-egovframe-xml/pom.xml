@@ -170,6 +170,38 @@
 			<version>20220320</version>
 		</dependency>
 
+		<!--	대용량 엑셀 업로드 추가	-->
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>4.1.2</version>
+</dependency>
+
+		<!--	엑셀 2007 이상 버전에서 사용	-->
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>4.1.2</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+<dependency>
+    <groupId>org.apache.tika</groupId>
+    <artifactId>tika-core</artifactId>
+    <version>2.3.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/sax/sax -->
+<dependency>
+    <groupId>sax</groupId>
+    <artifactId>sax</artifactId>
+    <version>2.0.1</version>
+</dependency>
+
+		<!-- 대용량 엑셀 업로드 추가 -->
+
 <!--Spring LDCD setting-->
 
 	</dependencies>
