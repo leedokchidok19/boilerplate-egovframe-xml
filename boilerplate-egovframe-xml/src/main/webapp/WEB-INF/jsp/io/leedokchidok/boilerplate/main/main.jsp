@@ -9,6 +9,7 @@
 	<link	href="/util/css/bootstrap-5.2.1-dist/css/bootstrap.min.css"	rel="stylesheet"	crossorigin="anonymous">
 	<link	href="/util/css/bootstrap-5.2.1-dist/icons-1.9.1/font/bootstrap-icons.css"	rel="stylesheet"	crossorigin="anonymous">
 	<script	src="/util/css/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"	crossorigin="anonymous"	defer ></script>
+	<script	src="/js/main/main.js"	crossorigin="anonymous"	defer ></script>
 </head>
 <body>
 
@@ -103,11 +104,12 @@
 		</div>
 <!--	carousel	-->
 
+<!--	menu	-->
 	<div class="d-flex flex-column flex-nowrap">
 		<div class="flex-shrink-0 p-3 bg-white m-auto">
 			<a href="#" class="d-flex justify-content-center align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 				<svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-				<span class="fs-5 fw-semibold">Collapsible</span>
+				<span class="fs-5 fw-semibold">Menu</span><!--Collapsible-->
 			</a>
 			<ul class="d-flex justify-content-center list-unstyled ps-0">
 				<li class="mb-1">
@@ -116,8 +118,8 @@
 				</button>
 				<div class="collapse" id="home-collapse" style="">
 					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-						<li><a href="/attendaceBook.do" class="link-dark d-inline-flex text-decoration-none rounded">출석부</a></li>
-						<li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Updates</a></li>
+						<li><a href="/attendaceBook.do" class="link-dark d-inline-flex text-decoration-none rounded">AttendaceBook</a></li>
+						<li><a href="/admin.do" class="link-dark d-inline-flex text-decoration-none rounded">Admin</a></li>
 						<li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Reports</a></li>
 					</ul>
 				</div>
@@ -165,11 +167,37 @@
 			</ul>
 		</div>
 	</div>
+<!--	menu	-->
+
+<!--	album	collapsible	bar	-->
+	<ul id="hashtag" class="nav justify-content-center border-bottom pb-3 mb-3">
+		<li class="nav-item px-2" data-type="0">#All</li>
+		<li class="nav-item px-2" data-type="1">#portFolio</li>
+		<li class="nav-item px-2" data-type="2">#Clone</li>
+		<li class="nav-item px-2" data-type="3">#Study</li>
+	</ul>
+<!--	album	collapsible	bar	-->
 
 <!--	Album	-->
-	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+	<div id="album" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-		<div class="col">
+		<div class="col" data-album-display="1">
+			<div class="card shadow-sm">
+			<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+			<div class="card-body">
+				<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				<div class="d-flex justify-content-between align-items-center">
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-outline-secondary">protFolio</button>
+					<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+				</div>
+				<small class="text-muted">9 mins</small>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="col" data-album-display="1">
 			<div class="card shadow-sm">
 			<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
@@ -185,23 +213,7 @@
 			</div>
 			</div>
 		</div>
-		<div class="col">
-			<div class="card shadow-sm">
-			<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-			<div class="card-body">
-				<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				<div class="d-flex justify-content-between align-items-center">
-				<div class="btn-group">
-					<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-					<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-				</div>
-				<small class="text-muted">9 mins</small>
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="col">
+		<div class="col" data-album-display="2">
 			<div class="card shadow-sm">
 			<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
