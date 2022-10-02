@@ -1,5 +1,6 @@
 ### leedokchidok ###
 /target
+target/
 .project
 .classpath
 .metadata
@@ -8,7 +9,10 @@
 /META-INF/
 /default-compile/
 /default-testCompile/
-
+database.properties
+/boilerplate-egovframe-xml-1.0.0/
+/classes/
+/maven-archiver/
 
 
 ### Eclipse ###
