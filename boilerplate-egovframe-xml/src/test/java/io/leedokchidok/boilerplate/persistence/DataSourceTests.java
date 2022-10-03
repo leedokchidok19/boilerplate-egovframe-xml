@@ -3,15 +3,13 @@ package io.leedokchidok.boilerplate.persistence;
 import static org.junit.Assert.fail;
 
 import java.sql.Connection;
-
 import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+import org.springframework.test.context.web.WebAppConfiguration;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -31,6 +29,7 @@ import lombok.extern.log4j.Log4j;
  *
  *  Copyright (C) by MOPAS All right reserved.
  */
+//@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/resources/egovframework/spring/context-datasource.xml")
 //Java 설정 사용하는 경우(설정 미구현)
