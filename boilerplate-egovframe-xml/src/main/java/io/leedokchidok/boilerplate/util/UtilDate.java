@@ -2,69 +2,74 @@ package io.leedokchidok.boilerplate.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class UtilDate {
-/*
-	public String getCurrentDate() {
 
-		//오늘 날짜 정보 조회
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	public String getCurrentDateTime() {
+		// 현재 시간
+		LocalDateTime dateTime = LocalDateTime.now();
+		// 포맷 정의하기
+		String formatDateTime = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return formatDateTime;
 	}
 
-	public int getNowYear() {
-		
-		return new Date().getYear();
+	public LocalDate getCurrentDate() {
+		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
+		//LocalDate date = LocalDate.now();
+		// 현재 날짜 구하기(Seoul)
+		LocalDate seoulDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		// 현재 날짜 구하기(Paris)
+		//LocalDate parisDate = LocalDate.now(ZoneId.of("Europe/Paris"));
+		return seoulDate;
 	}
 
-	public int getDateMonth() {
-
-		return new Date().getMonth();
+	public LocalTime getCurrentTime() {
+		// 현재 시간
+		LocalTime time = LocalTime.now();
+		return time;
 	}
 
-	public int getDateDay() {
-
-		return new Date().getDay();
-	}
-*/
-
-
-	public int getNowYear() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		return calendar.get(Calendar.YEAR);
+	public int getYear() {
+		return getCurrentDate().getYear();
 	}
 
-	public int getDateMonth() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		return calendar.get(Calendar.MONTH);
+	//month : 1~12
+	public int getMonth() {
+		return getCurrentDate().getMonthValue();
 	}
 
-	public int getDateDay() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		return calendar.get(Calendar.DAY_OF_MONTH);
+	//day : 1~31
+	public int getDay() {
+		return getCurrentDate().getDayOfMonth();
 	}
 
-	public Calendar getyyyyMMddHHmmss() {
+	//hour : 1~24
+	public int getHour() {
+		return getCurrentTime().getHour();
+	}
 
-		//오늘 날짜 정보 조회e
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		return calendar;
+	//minute : 1~60
+	public int getMinute() {
+		return getCurrentTime().getMinute();
+	}
+
+	//second : 1~60
+	public int getSecond() {
+		return getCurrentTime().getSecond();
 	}
 
 	public String getyyyyMMdd() {
 
-		String month = Integer.toString(getDateMonth());
+		String month = Integer.toString(getMonth());
 		month  = Integer.parseInt(month)< 10 ? "0"+month : month;
 
-		String day =  Integer.toString(getDateDay());
+		String day =  Integer.toString(getDay());
 		day  = Integer.parseInt(day) < 10 ? "0"+day : day;
 
-		return  getNowYear() + month +  day;
+		return  getYear() + month + day;
 	}// getyyyyMMdd
 
 	public int compareToDay(String inDate) throws ParseException {
