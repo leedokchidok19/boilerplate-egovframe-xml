@@ -18,6 +18,7 @@ public class JDBCConnection {
 	static {
 		try {
 			Class.forName("net.sf.log4jdbc.DriverSpy");
+			//Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -27,13 +28,16 @@ public class JDBCConnection {
 	public void testConnection() {
 
 		//DB schema
-		String schema	= "DB_Schema";	//스키마
-		String username	= "ex_username";//유저명
-		String password	= "ex_password";//비밀번호
+		String schema	=	"DB_Schema";	//스키마
+		String username	=	"ex_username";	//유저명
+		String password	=	"ex_password";	//비밀번호
+		//DB driver
+		String driver	=	"jdbc:log4jdbc:mysql://127.0.0.1:3306/"+schema+"?serverTimezone=UTC&useSSL=false";	// MySQL
+		//String driver	=	"jdbc:oracle:thin:@localhost:1521:XE";	//Oracle
 
 		try (Connection con =
 				DriverManager.getConnection(//mysql 연결 : DB_Schema/ex_username/ex_password
-						"jdbc:log4jdbc:mysql://127.0.0.1:3306/"+schema+"?serverTimezone=UTC&useSSL=false",
+						driver,
 						username,
 						password)){
 			log.info(con);
