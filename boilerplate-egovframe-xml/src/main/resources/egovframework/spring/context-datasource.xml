@@ -3,8 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc
 						http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+						http://mybatis.org/schema/mybatis-spring
+						http://mybatis.org/schema/mybatis-spring-1.2.xsd
 						http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 						http://www.springframework.org/schema/context
@@ -57,5 +60,13 @@
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!--	MyBatis가 동작할 때 Mapper를 인식할 수 있도록 처리
+			Namespace에서	 mybatis-spring 설정 체크 / Xml, Mapper에서 각각 설정도 가능	-->
+	<mybatis-spring:scan base-package="io.leedokchidok.boilerplate.mapper"/>
 
 </beans>
