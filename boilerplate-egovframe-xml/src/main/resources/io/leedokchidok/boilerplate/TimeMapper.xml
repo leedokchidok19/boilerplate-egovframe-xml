@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="egovframework.sqlmap.boilerplate.mappers.TimeMapper">
+<!--
+	XML Mapper의 <mapper> 태그의 namespace의 속성 값과 인터페이스의 이름이 같은 경우
+	병합해서 처리하기 때문에 인터페이스의 이름을 가지고 XML의 SQL 실행
+-->
+<!--	Oracle
+	<select id="getTime2" resultType="String">
+		SELECT sysdate FROM dual
+	</select>
+-->
+	<select id="getTime2" resultType="String">
+		SELECT NOW()
+	</select>
+
+</mapper>
