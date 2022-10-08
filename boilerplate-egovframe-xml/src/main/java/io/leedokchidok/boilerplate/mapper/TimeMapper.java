@@ -8,6 +8,4 @@ public interface TimeMapper {
 	@Select("SELECT NOW()")	//MySQL
 	public String getTime();
 
-	public String getTime2();
-
 }
