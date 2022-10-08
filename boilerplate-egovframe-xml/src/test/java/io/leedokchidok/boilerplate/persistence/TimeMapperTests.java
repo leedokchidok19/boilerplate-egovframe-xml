@@ -1,7 +1,5 @@
 package io.leedokchidok.boilerplate.persistence;
 
-import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +25,11 @@ public class TimeMapperTests {
 		log.info(timeMapper.getClass().getName());
 		log.info(timeMapper.getTime());
 	}
+/*
+	@Test
+	public void testGetTime2() {
+		log.info("testGetTime2");
+		log.info(timeMapper.getTime2());
+	}
+*/
 }
