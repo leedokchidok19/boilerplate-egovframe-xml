@@ -6,6 +6,8 @@
 
 ### README
 * [리눅스 명령어](/readme/command-linux.md)
+* [마크다운 작성법](/readme/markdown.md)
+* [윈도우 명령어](/readme/command-window.md)
 
 ### 라이브러리
 * [fontawesome-free-6.1.2](https://fontawesome.com/start)
@@ -18,6 +20,12 @@
 * [CI/CD란?](https://seosh817.tistory.com/104)
 
 ### 참고
-|                   설명              |                                           링크                                                    |
-|:-----------------------------------|:-------------------------------------------------------------------------------------------------:|
-|      insertAdjacentHTML 태그       |        [insertAdjacentHTML - HTML 인접(adjacent)요소에 삽입하기](https://webclub.tistory.com/535)    |
+|					설명			|										   링크													|
+|:------------------------------|:---------------------------------------------------------------------------------------------:|
+|	insertAdjacentHTML 태그		|		[insertAdjacentHTML - HTML 인접(adjacent)요소에 삽입하기](https://webclub.tistory.com/535)	|
+|	현재 날짜, 시간 구하기			|		[현재날짜(Java8전후)](https://hianna.tistory.com/607)										|
+|	현재 날짜, 시간 구하기			|		[SimpleDateFormat](https://the-illusionist.me/41)										|
+|	JS 문자열을 숫자로 변환			|		[parseInt()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/parseInt#%EB%8D%94_%EC%97%84%EA%B2%A9%ED%95%9C_%ED%8C%8C%EC%8B%B1_%ED%95%A8%EC%88%98)	|
+|	HTML dataset				|		[데이터 속성 사용하기](https://developer.mozilla.org/ko/docs/Learn/HTML/Howto/Use_data_attributes)	|
+|								|		[]()									|
+
