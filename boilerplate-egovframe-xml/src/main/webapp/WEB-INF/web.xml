@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app	id="WebApp_ID"	version="3.1"	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+			xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee;
 								http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<display-name>egov.sample</display-name>
-    
+
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -15,9 +15,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-    
+
 	<filter>
 		<filter-name>HTMLTagFilter</filter-name>
 		<filter-class>org.egovframe.rte.ptl.mvc.filter.HTMLTagFilter</filter-class>
@@ -26,16 +26,16 @@
 		<filter-name>HTMLTagFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-    
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:egovframework/spring/context-*.xml</param-value>
 	</context-param>
-    
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-    
+
 	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -44,21 +44,30 @@
 			<param-value>/WEB-INF/config/egovframework/springmvc/dispatcher-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+
+		<!--	다중 파일 업로드	WAS(Tomcat) 자체 설정으로 스프링 업로드(MultipartResolver) 별도의 빈 등록 필요-->
+		<multipart-config>
+			<location>C:\\upload\\temp</location><!--업로드 파일 저장 공간-->
+			<max-file-size>20971520</max-file-size><!--업로드 되는 파일의 최대 크기 : 1MB*20-->
+			<max-request-size>41943040</max-request-size><!--한 번에 올릴 수 있는 최대 크기 : 40MB-->
+			<file-size-threshold>20971520</file-size-threshold><!--특정 사이즈의 메모리 사용 : 20MB-->
+		</multipart-config>
+
 	</servlet>
-    
+
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-    
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-    
+
 	<login-config>
 		<auth-method>BASIC</auth-method>
 	</login-config>
-    
+
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/common/error.jsp</location>
@@ -71,5 +80,5 @@
 		<error-code>500</error-code>
 		<location>/common/error.jsp</location>
 	</error-page>
-    
+
 </web-app>
