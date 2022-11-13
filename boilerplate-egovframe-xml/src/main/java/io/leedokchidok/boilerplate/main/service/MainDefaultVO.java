@@ -2,6 +2,8 @@
 package io.leedokchidok.boilerplate.main.service;
 
 import java.io.Serializable;
+//import java.util.Date;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -59,5 +61,8 @@ public class MainDefaultVO implements Serializable {
 
 	/** recordCountPerPage */
 	private int recordCountPerPage = 10;
-
+/* 날짜 변환
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date dueDate;
+*/
 }
