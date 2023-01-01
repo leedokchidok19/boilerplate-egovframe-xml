@@ -4,7 +4,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias	alias="egovMap"			type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
-		<typeAlias	alias="AttendaceBookVO"	type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO"/>
 		<typeAlias	alias="searchVO"		type="io.leedokchidok.boilerplate.main.service.MainDefaultVO"/>
+
+		<typeAlias	alias="AttendaceBookVO"	type="io.leedokchidok.boilerplate.attendacebook.service.AttendaceBookVO"/>
+		<typeAlias	alias="AdminVO"			type="io.leedokchidok.boilerplate.admin.service.AdminVO"/>
+		<typeAlias	alias="BoardVO"			type="io.leedokchidok.boilerplate.board.service.BoardVO"/>
+
 	</typeAliases>
 </configuration>

@@ -1,4 +1,4 @@
-package io.leedokchidok.boilerplate.attendacebook.service.impl;
+package io.leedokchidok.boilerplate.attendacebook.mapper;
 
 import java.util.List;
 

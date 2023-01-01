@@ -27,7 +27,7 @@
 	</bean>
 
  	<bean class="org.egovframe.rte.psl.dataaccess.mapper.MapperConfigurer">
-		<property	name="basePackage"		value="io.leedokchidok.boilerplate.*.service.impl" />
+		<property	name="basePackage"		value="io.leedokchidok.boilerplate.*.mapper" />
 	</bean>
 
 </beans>
