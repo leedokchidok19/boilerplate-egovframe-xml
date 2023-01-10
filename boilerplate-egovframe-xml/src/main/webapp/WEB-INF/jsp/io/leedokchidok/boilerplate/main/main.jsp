@@ -10,6 +10,9 @@
 	<link	href="/util/css/bootstrap-5.2.1-dist/icons-1.9.1/font/bootstrap-icons.css"	rel="stylesheet"	crossorigin="anonymous">
 	<script	src="/util/css/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"	crossorigin="anonymous"	defer ></script>
 	<script	src="/js/main/main.js"	crossorigin="anonymous"	defer ></script>
+<!-- 날씨-->
+<script	src="/js/weather/weather.js" defer></script>
+<link	href="/css/weather/weather.css"	rel="stylesheet"	type="text/css" >
 </head>
 <body>
 
